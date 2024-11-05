@@ -3,7 +3,7 @@ package store.utils;
 import java.util.List;
 
 public class Parser {
-    public static List<String> trimProductStrings(List<String> productStrings) {
+    public static List<String> removeHeader(List<String> productStrings) {
         productStrings.remove(0);
         return productStrings;
     }
