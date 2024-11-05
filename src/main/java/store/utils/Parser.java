@@ -8,10 +8,6 @@ public class Parser {
         return productStrings;
     }
 
-    public static String[] parseProductString(String productString) {
-        return productString.split(",");
-    }
-
     public static String parsePromotionName(String promotionName) {
         if (promotionName.equals("null")) {
             return null;

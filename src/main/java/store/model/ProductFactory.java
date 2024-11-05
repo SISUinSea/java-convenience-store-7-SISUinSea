@@ -1,6 +1,5 @@
 package store.model;
 
-import static store.utils.Parser.parseProductString;
 import static store.utils.Parser.parsePromotionName;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public class ProductFactory {
     }
 
     public static Product createSingleProduct(String productData) {
-        String[] parsedProductData = parseProductString(productData);
+        String[] parsedProductData = productData.split(",");
         String name = parsedProductData[0];
         Integer price = Integer.parseInt(parsedProductData[1]);
         Integer quantity = Integer.parseInt(parsedProductData[2]);
