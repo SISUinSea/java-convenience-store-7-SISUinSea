@@ -7,11 +7,11 @@ import java.util.List;
 
 public class ProductFactory {
     public static ProductTable createProductTable(List<String> productTableData) {
-        List<Product> table = productTableData.stream().map(ProductFactory::createProduct).toList();
+        List<Product> table = productTableData.stream().map(ProductFactory::createSingleProduct).toList();
         return new ProductTable(table);
     }
 
-    public static Product createProduct(String productData) {
+    public static Product createSingleProduct(String productData) {
         String[] parsedProductData = parseProductString(productData);
         String name = parsedProductData[0];
         Integer price = Integer.parseInt(parsedProductData[1]);

@@ -9,12 +9,14 @@ import java.util.List;
 import store.model.ProductTable;
 
 import static store.model.ProductFactory.createProductTable;
-import static store.utils.Parser.trimProductStrings;;
+import static store.utils.Parser.removeHeader;
+import static store.view.OutputView.printProductTable;
 
 public class MainController {
     public static void run() throws IOException {
         List<String> productLines = Files.readAllLines(Paths.get("./src/main/resources/products.md"));
-        List<String> trimedProductLines = trimProductStrings(productLines);
-        ProductTable productTable = createProductTable(trimedProductLines);
+        List<String> trimmedProductLines = removeHeader(productLines);
+        ProductTable productTable = createProductTable(trimmedProductLines);
+        printProductTable(productTable);
     }
 }
