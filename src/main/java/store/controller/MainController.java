@@ -7,7 +7,7 @@ import java.util.List;
 
 import store.model.ProductTable;
 import store.model.PromotionTable;
-import store.model.PurchaseRequestQueue;
+import store.model.PurchaseRequests;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 import static store.model.ProductFactory.createProductTable;
@@ -22,7 +22,7 @@ public class MainController {
         printProductTable(productTable);
         PromotionTable promotionTable = bootPromotionTable();
         String purchaseLine = askPurchaseRequest();
-        PurchaseRequestQueue purchaseRequestQueue = createPurchaseRequestQueue(purchaseLine);
+        PurchaseRequests purchaseRequestQueue = createPurchaseRequestQueue(purchaseLine);
     }
 
     public static ProductTable bootProductTable() throws IOException {
