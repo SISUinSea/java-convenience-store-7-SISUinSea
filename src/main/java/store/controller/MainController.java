@@ -22,7 +22,10 @@ public class MainController {
         printProductTable(productTable);
         PromotionTable promotionTable = bootPromotionTable();
         String purchaseLine = askPurchaseRequest();
-        PurchaseRequests purchaseRequestQueue = createPurchaseRequestQueue(purchaseLine);
+
+        PurchaseRequests purchaseRequests = createPurchaseRequestQueue(purchaseLine);
+        productTable.validateRequests(purchaseRequests.getRequests());
+
     }
 
     public static ProductTable bootProductTable() throws IOException {

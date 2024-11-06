@@ -14,6 +14,9 @@ public class Product {
         this.quantity = quantity;
         this.promotion = promotion;
     }
+
+    public String getName() { return name; }
+    public Integer getQuantity() { return quantity; }
     
     @Override
     public String toString() {
