@@ -1,4 +1,4 @@
-package store.model;
+package store.model.PurchaseRequest;
 
 public class PurchaseRequest {
     private final String productName;

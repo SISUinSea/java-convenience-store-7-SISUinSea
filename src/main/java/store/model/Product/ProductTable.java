@@ -1,9 +1,11 @@
-package store.model;
+package store.model.Product;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import store.model.PurchaseRequest.PurchaseRequest;
 
 public class ProductTable {
     List<Product> table;

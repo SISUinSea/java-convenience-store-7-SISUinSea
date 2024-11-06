@@ -5,14 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import store.model.ProductTable;
-import store.model.PromotionTable;
-import store.model.PurchaseRequests;
+import store.model.Product.ProductTable;
+import store.model.Promotion.PromotionTable;
+import store.model.PurchaseRequest.PurchaseRequests;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
-import static store.model.ProductFactory.createProductTable;
-import static store.model.PromotionFactory.createPromotionTable;
-import static store.model.PurchaseRequestFactory.createPurchaseRequestQueue;
+import static store.model.Product.ProductFactory.createProductTable;
+import static store.model.Promotion.PromotionFactory.createPromotionTable;
+import static store.model.PurchaseRequest.PurchaseRequestFactory.createPurchaseRequestQueue;
 import static store.utils.Parser.removeHeader;
 import static store.view.OutputView.printProductTable;
 

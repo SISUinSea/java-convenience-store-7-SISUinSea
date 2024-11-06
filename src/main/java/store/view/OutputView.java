@@ -1,6 +1,6 @@
 package store.view;
 
-import store.model.ProductTable;
+import store.model.Product.ProductTable;
 
 public class OutputView {
     public static void printProductTable(ProductTable productTable) {

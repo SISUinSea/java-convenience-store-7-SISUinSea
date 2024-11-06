@@ -1,8 +1,10 @@
-package store.model;
+package store.model.Product;
+
+import static store.model.Promotion.PromotionTable.getPromotionByName;
 
 import java.text.NumberFormat;
 
-import static store.model.PromotionTable.getPromotionByName;
+import store.model.Promotion.Promotion;
 
 public class Product {
     private final String name;

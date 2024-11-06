@@ -1,4 +1,4 @@
-package store.model;
+package store.model.Promotion;
 
 import java.time.LocalDate;
 import java.util.List;

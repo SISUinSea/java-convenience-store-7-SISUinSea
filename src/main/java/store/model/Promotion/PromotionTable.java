@@ -1,4 +1,4 @@
-package store.model;
+package store.model.Promotion;
 
 import java.util.List;
 

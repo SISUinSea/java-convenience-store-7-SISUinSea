@@ -1,4 +1,4 @@
-package store.model;
+package store.model.Product;
 
 import static store.utils.Parser.parsePromotionName;
 

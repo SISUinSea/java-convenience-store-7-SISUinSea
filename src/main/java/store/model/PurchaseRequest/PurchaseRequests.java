@@ -1,4 +1,4 @@
-package store.model;
+package store.model.PurchaseRequest;
 
 import java.util.List;
 
