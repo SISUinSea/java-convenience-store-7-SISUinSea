@@ -18,4 +18,8 @@ public class Promotion {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public String getName() {
+        return name;
+    }
 }

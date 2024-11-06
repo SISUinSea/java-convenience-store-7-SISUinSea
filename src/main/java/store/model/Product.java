@@ -2,17 +2,19 @@ package store.model;
 
 import java.text.NumberFormat;
 
+import static store.model.PromotionTable.getPromotionByName;
+
 public class Product {
     private final String name;
     private final Integer price;
     private Integer quantity;
-    private final String promotion;
+    private final Promotion promotion;
 
     public Product(final String name, final Integer price, final Integer quantity, final String promotion) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.promotion = promotion;
+        this.promotion = getPromotionByName(promotion);
     }
 
     public String getName() { return name; }
@@ -39,6 +41,6 @@ public class Product {
         if (promotion == null) {
             return "";
         }
-        return promotion;
+        return promotion.getName();
     }
 } 
