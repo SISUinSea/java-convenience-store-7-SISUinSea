@@ -10,7 +10,7 @@ public class ProductFactory {
         return new ProductTable(table);
     }
 
-    public static Product createSingleProduct(String productData) {
+    private static Product createSingleProduct(String productData) {
         String[] parsedProductData = productData.split(",");
         String name = parsedProductData[0];
         Integer price = Integer.parseInt(parsedProductData[1]);
