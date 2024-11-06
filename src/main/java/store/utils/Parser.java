@@ -14,4 +14,11 @@ public class Parser {
         }
         return promotionName;
     }
+
+    public static String removeSquareBrakets(String wrappedString) {
+        if(!(wrappedString.startsWith("[") && wrappedString.endsWith("]"))) {
+            throw new IllegalArgumentException();
+        }
+        return wrappedString.substring(1, wrappedString.length() - 1);
+    }
 }
