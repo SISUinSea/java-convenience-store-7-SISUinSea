@@ -1,8 +1,8 @@
 package store.model;
 
 import java.time.LocalDate;
-
-import camp.nextstep.edu.missionutils.DateTimes;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Promotion {
     private final String name;
@@ -19,7 +19,14 @@ public class Promotion {
         this.endDate = endDate;
     }
 
-    public String getName() {
-        return name;
+    public boolean isPromotioning(LocalDateTime currentTime) {
+        if (startDate.atStartOfDay().isBefore(currentTime) && endDate.atTime(LocalTime.MAX).isAfter(currentTime)) {
+            return true;
+        }
+        return false;
     }
+
+    public String getName() { return name; }
+    public LocalDate getStartDate() { return startDate; }
+    public LocalDate getEndDate() { return endDate; }
 }

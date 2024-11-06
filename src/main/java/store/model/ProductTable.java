@@ -1,5 +1,7 @@
 package store.model;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,21 @@ public class ProductTable {
     public boolean hasEnoughQuantity(String productName, Integer requestQuantity) {
         Integer totalQuantity = table.stream().mapToInt(Product::getQuantity).sum();
         if (totalQuantity >= requestQuantity) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasPromotion(String productName, LocalDateTime time) {
+        List<Product> products = table.stream().filter(product -> product.getName().equals(productName) && product.getPromotion() != null).toList();
+        List<Product> currentPromotionProduct = products.stream().filter(product -> product.getPromotion().isPromotioning(time)).toList();
+        return !currentPromotionProduct.isEmpty();
+    }
+
+    public boolean hasEnoughPromotionQuantity(String productName, Integer requestQuantity) {
+        List<Product> promotionProducts = table.stream().filter(product -> product.getName().equals(productName) && product.getPromotion() != null).toList();
+        Integer promotionQuantity = promotionProducts.stream().mapToInt(Product::getQuantity).sum();
+        if (promotionQuantity >= requestQuantity) {
             return true;
         }
         return false;

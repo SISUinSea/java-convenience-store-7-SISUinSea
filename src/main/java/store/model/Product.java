@@ -17,8 +17,11 @@ public class Product {
         this.promotion = getPromotionByName(promotion);
     }
 
+     
+
     public String getName() { return name; }
     public Integer getQuantity() { return quantity; }
+    public Promotion getPromotion() { return promotion; }
     
     @Override
     public String toString() {
