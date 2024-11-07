@@ -18,4 +18,14 @@ public class ProductFactory {
         String promotion = parsePromotionName(parsedProductData[3]);
         return new Product(name, price, quantity, promotion);
     }
+
+    public static Product createSingleTransactionProduct(String name, Integer totalQuantity, Integer promotionQuantity,
+            ProductTable productTable) {
+        if (promotionQuantity == 0 || promotionQuantity == null) {
+            return new Product(name, productTable.getProductPriceByName(name), totalQuantity, null);
+        }
+
+        return new Product(name, productTable.getProductPriceByName(name), totalQuantity,
+                productTable.getPromotionByName(name).getName());
+    }
 }

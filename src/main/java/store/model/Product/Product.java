@@ -19,12 +19,36 @@ public class Product {
         this.promotion = getPromotionByName(promotion);
     }
 
-     
+    public boolean isEmpty() {
+        if (quantity == 0) {
+            return true;
+        }
+        return false;
+    }
 
-    public String getName() { return name; }
-    public Integer getQuantity() { return quantity; }
-    public Promotion getPromotion() { return promotion; }
-    
+    public void decreaseQuantityByOne() {
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
+        quantity--;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
     @Override
     public String toString() {
         // - 콜라 1,000원 10개 탄산2+1
@@ -48,4 +72,4 @@ public class Product {
         }
         return promotion.getName();
     }
-} 
+}

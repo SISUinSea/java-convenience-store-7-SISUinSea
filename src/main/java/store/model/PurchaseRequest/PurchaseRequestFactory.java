@@ -7,7 +7,7 @@ import java.util.List;
 import store.utils.Parser;
 
 public class PurchaseRequestFactory {
-    public static PurchaseRequests createPurchaseRequestQueue(String purchaseData) {
+    public static PurchaseRequests createPurchaseRequests(String purchaseData) {
         List<String> requests = Arrays.stream(purchaseData.split(","))
                                                 .map(Parser::removeSquareBrakets)
                                                 .toList();

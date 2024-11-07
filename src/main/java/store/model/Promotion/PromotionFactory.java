@@ -5,7 +5,8 @@ import java.util.List;
 
 public class PromotionFactory {
     public static PromotionTable createPromotionTable(List<String> promotionTableData) {
-        List<Promotion> promotions = promotionTableData.stream().map(PromotionFactory::createSinglePromotion).toList();
+        List<Promotion> promotions = promotionTableData.stream()
+                .map(PromotionFactory::createSinglePromotion).toList();
         return new PromotionTable(promotions);
     }
 

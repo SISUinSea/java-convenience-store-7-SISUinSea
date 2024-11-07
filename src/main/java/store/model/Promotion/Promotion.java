@@ -27,6 +27,8 @@ public class Promotion {
     }
 
     public String getName() { return name; }
+    public Integer getBuy() { return buy; }
+    public Integer getGet() { return get; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
 }
