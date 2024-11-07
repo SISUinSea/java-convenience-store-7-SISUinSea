@@ -76,7 +76,7 @@ public class MainController {
                         request.getQuantity() - productTable.getPromotionBundleCount(request.getProductName()));
                 if (answer.equals("Y")) {
                     Product transactionProduct = createSingleTransactionProduct(request.getProductName(),
-                            productTable.getPromotionBundleCount(request.getProductName()),
+                            request.getQuantity(),
                             productTable.getPromotionBundleCount(request.getProductName()), productTable);
                     productTable.update(transactionProduct);
                     // transactions.add()
