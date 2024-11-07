@@ -26,9 +26,31 @@ public class Promotion {
         return false;
     }
 
-    public String getName() { return name; }
-    public Integer getBuy() { return buy; }
-    public Integer getGet() { return get; }
-    public LocalDate getStartDate() { return startDate; }
-    public LocalDate getEndDate() { return endDate; }
+    public Integer getFreeQuantity(Integer promotionQuantity) {
+        return promotionQuantity / getBundle() * get;
+    }
+
+    public Integer getBundle() {
+        return buy + get;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getBuy() {
+        return buy;
+    }
+
+    public Integer getGet() {
+        return get;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 }
