@@ -38,7 +38,7 @@ public class Transaction {
     }
 
     public String promotionToString() {
-        if (!product.hasPromotion()) {
+        if (!product.hasPromotion() || product.getQuantity() == 0) {
             return null;
         }
         Integer get = product.getPromotion().getGet();
