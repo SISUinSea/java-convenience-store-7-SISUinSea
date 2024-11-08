@@ -61,7 +61,6 @@ public class Product {
         if (promotion == null) {
             return false;
         }
-
         return true;
     }
 

@@ -18,17 +18,19 @@ public class Receipt {
     private Integer finalPayCost;
 
     public Receipt(TransactionTable transactionTable, Discount discount) {
-        for (Transaction transaction : transactionTable.getTransactions()) {
-            totalTransactions.add(transaction.toString());
-            totalQuantity += transaction.getQuantity();
-            promotionTransactions.add(transaction.promotionToString());
-            totalPurchaseCost += transaction.getTotalCost();
-            promotionCost += transaction.getPromotionDiscountCost();
-        }
+        transactionTable.getTransactions().stream().forEach(transaction -> recordTransaction(transaction));
         if (discount != null) {
             discountCost = discount.applyDiscount(totalPurchaseCost - promotionCost);
         }
-        finalPayCost = totalPurchaseCost - promotionCost - discountCost; // TODO. method line over 10
+        finalPayCost = totalPurchaseCost - promotionCost - discountCost;
+    }
+
+    private void recordTransaction(Transaction transaction) {
+        totalTransactions.add(transaction.toString());
+        totalQuantity += transaction.getQuantity();
+        promotionTransactions.add(transaction.promotionToString());
+        totalPurchaseCost += transaction.getTotalCost();
+        promotionCost += transaction.getPromotionDiscountCost();
     }
 
     public List<String> getTotalTransactions() {

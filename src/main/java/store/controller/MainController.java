@@ -29,20 +29,35 @@ import static store.view.OutputView.printProductTable;
 import static store.view.OutputView.printReceipt;
 import static store.view.InputView.askPurchaseRequest;
 import static store.view.InputView.askAddFreePromotionProducts;
+import static store.view.InputView.askApplyMembershipDiscount;
 import static store.view.InputView.askRemoveNoPromotionProducts;
+import static store.view.InputView.askToContinuePurchase;
 
 public class MainController {
     public static void run() throws IOException {
         ProductTable productTable = bootProductTable();
-        printProductTable(productTable);
+        purchaseUntilGetStopCommand(productTable);
+    }
 
+    public static void purchaseUntilGetStopCommand(ProductTable productTable) {
+        while (true) {
+            printProductTable(productTable);
+            PurchaseRequests purchaseRequests = askUntilGetValidRequests(productTable);
+            TransactionTable transactionTable = processRequests(productTable, purchaseRequests, now());
+            Discount membershipDiscount = suggestMembershipDiscount();
+            Receipt receipt = new Receipt(transactionTable, membershipDiscount);
+            printReceipt(receipt);
+            if (askToContinuePurchase().equals("N")) {
+                break;
+            }
+        }
+    }
+
+    public static PurchaseRequests askUntilGetValidRequests(ProductTable productTable) {
         String purchaseLine = askPurchaseRequest();
         PurchaseRequests purchaseRequests = createPurchaseRequests(purchaseLine);
         productTable.validateRequests(purchaseRequests.getRequests());
-        TransactionTable transactionTable = processRequests(productTable, purchaseRequests, now());
-        Discount membershipDiscount = createMembershipDiscount();
-        Receipt receipt = new Receipt(transactionTable, membershipDiscount);
-        printReceipt(receipt);
+        return purchaseRequests;
     }
 
     public static ProductTable bootProductTable() throws IOException {
@@ -121,6 +136,14 @@ public class MainController {
         Integer quantityBundleCount = quantity - (quantity % bundle);
         Integer promotionBundleCount = productTable.getPromotionBundleCount(name);
         return Math.min(quantityBundleCount, promotionBundleCount);
+    }
+
+    public static Discount suggestMembershipDiscount() {
+        String answer = askApplyMembershipDiscount();
+        if (answer.equals("Y")) {
+            return createMembershipDiscount();
+        }
+        return null;
     }
 
 }
