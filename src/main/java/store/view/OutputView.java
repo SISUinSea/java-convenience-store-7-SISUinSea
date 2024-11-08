@@ -1,6 +1,9 @@
 package store.view;
 
+import java.util.stream.Collectors;
+
 import store.model.Product.ProductTable;
+import store.model.Receipt.Receipt;
 
 public class OutputView {
     public static void printProductTable(ProductTable productTable) {
@@ -14,4 +17,25 @@ public class OutputView {
         System.out.println("현재 보유하고 있는 상품입니다.");
         System.out.print("\n");
     }
+
+    public static void printReceipt(Receipt receipt) {
+        System.out.println("==============W 편의점================"); // TODO. DIVIDER_RECEIPT_HEADER
+        System.out.println("상품명" + "\t\t" + "수량" + "\t" + "금액");
+        System.out.println(receipt.getTotalTransactions().stream().collect(Collectors.joining("\n")));
+        System.out.println("=============증	정==============="); // TODO. DIVIDER_PROMOTION_HEADER;
+        System.out.println(receipt.getPromotionTransactions().stream().collect(Collectors.joining("\n")));
+        System.out.println("===================================="); // TODO. DIVIDER_DEFAULT_LINE
+        System.out.println("총구매액" + "\t\t" + receipt.getTotalQuantity() + "\t" + receipt.getCostInformation().get(0));
+        System.out.println("행사할인" + "\t\t" + "\t" + receipt.getCostInformation().get(1));
+        System.out.println("멤버십할인" + "\t\t" + "\t" + receipt.getCostInformation().get(2));
+        System.out.println("내실돈" + "\t\t" + "\t" + receipt.getCostInformation().get(3));
+
+    }
 }
+/*
+ * ====================================
+ * 총구매액 8 13,000
+ * 행사할인 -1,000
+ * 멤버십할인 -3,000
+ * 내실돈 9,000
+ */

@@ -10,13 +10,20 @@ public class Product {
     private final String name;
     private final Integer price;
     private Integer quantity;
-    private final Promotion promotion;
+    private Promotion promotion;
 
     public Product(final String name, final Integer price, final Integer quantity, final String promotion) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.promotion = getPromotionByName(promotion);
+    }
+
+    public Product(final String name, final Integer price, final Integer quantity, final Promotion promotion) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.promotion = promotion;
     }
 
     public boolean isEmpty() {
@@ -28,7 +35,8 @@ public class Product {
 
     public void decreaseQuantityByOne() {
         if (isEmpty()) {
-            throw new IllegalStateException();
+            // throw new IllegalStateException();
+            return;
         }
         quantity--;
     }
@@ -47,6 +55,14 @@ public class Product {
 
     public Promotion getPromotion() {
         return promotion;
+    }
+
+    public boolean hasPromotion() { // TODO. 중복되는 메소드?
+        if (promotion == null) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

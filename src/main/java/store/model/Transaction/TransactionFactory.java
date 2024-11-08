@@ -1,15 +1,14 @@
 package store.model.Transaction;
 
 import store.model.Product.Product;
-import store.model.Transaction.Transaction;
+import store.model.Promotion.Promotion;
 
 public class TransactionFactory {
-    public static Transaction createSingleTransaction(Product product, Integer promotionQuantity) {
-        return new Transaction(product, promotionQuantity);
+    public static Transaction createTransaction(String name, Integer price, Integer quantity, Integer promotionQuantity,
+            Promotion promotion) {
+        if (promotionQuantity > quantity) {
+            quantity = promotionQuantity;
+        }
+        return new Transaction(new Product(name, price, quantity, promotion), promotionQuantity);
     }
-
-    public static Transaction createSingleTransaction(Product product) {
-        return new Transaction(product, null);
-    }
-
 }

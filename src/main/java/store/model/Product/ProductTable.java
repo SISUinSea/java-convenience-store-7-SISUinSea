@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import store.model.Promotion.Promotion;
 import store.model.PurchaseRequest.PurchaseRequest;
+import store.model.Transaction.Transaction;
 
 public class ProductTable {
     List<Product> table;
@@ -36,7 +37,7 @@ public class ProductTable {
         return false;
     }
 
-    public Integer getOptimalQuantity(String productName, Integer requestQuantity) {
+    public Integer getAdditionalQuantityToOptimize(String productName, Integer requestQuantity) {
         List<Product> targetProduct = getPromotionProducts(productName);
         Promotion targetPromotion = targetProduct.get(0).getPromotion();
         Integer buy = targetPromotion.getBuy();
@@ -47,12 +48,12 @@ public class ProductTable {
         return 0;
     }
 
-    public void update(Product transactionProduct) {
+    public void update(Transaction transaction) {
         List<Product> targetProducts = table.stream()
-                .filter(product -> product.getName().equals(transactionProduct.getName())).toList();
+                .filter(p -> p.getName().equals(transaction.getName())).toList();
         Integer totalPurchaseQuantity = 0;
         for (Product product : targetProducts) {
-            while (!product.isEmpty() && totalPurchaseQuantity < transactionProduct.getQuantity()) {
+            while (!product.isEmpty() && totalPurchaseQuantity < transaction.getQuantity()) {
                 product.decreaseQuantityByOne();
                 totalPurchaseQuantity++;
             }
@@ -87,7 +88,7 @@ public class ProductTable {
         return targetProduct.getQuantity() - (targetProduct.getQuantity() % (buy + get));
     }
 
-    public List<Product> getProductsByName(String productName) {
+    public List<Product> getProductsByProductName(String productName) {
         return table.stream().filter(product -> product.getName().equals(productName)).toList();
     }
 
@@ -96,7 +97,11 @@ public class ProductTable {
         return products.get(0).getPrice();
     }
 
-    public Promotion getPromotionByName(String productName) {
+    public Promotion getPromotionByProductName(String productName, LocalDateTime time) {
+        if (!hasPromotion(productName, time)) {
+            return null;
+        }
+        List<Product> promotionProducts = getPromotionProducts(productName);
         return getPromotionProducts(productName).get(0).getPromotion();
     }
 

@@ -8,4 +8,8 @@ public class TransactionTable {
     public TransactionTable(List<Transaction> purchases) {
         this.purchases = purchases;
     }
+
+    public List<Transaction> getTransactions() {
+        return purchases;
+    }
 }

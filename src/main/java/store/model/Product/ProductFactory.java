@@ -2,6 +2,7 @@ package store.model.Product;
 
 import static store.utils.Parser.parsePromotionName;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProductFactory {
@@ -19,13 +20,14 @@ public class ProductFactory {
         return new Product(name, price, quantity, promotion);
     }
 
-    public static Product createSingleTransactionProduct(String name, Integer totalQuantity, Integer promotionQuantity,
-            ProductTable productTable) {
+    public static Product createSingleTransactionProduct(String name, Integer totalQuantity,
+            Integer promotionQuantity,
+            ProductTable productTable, LocalDateTime time) {
         if (promotionQuantity == 0 || promotionQuantity == null) {
-            return new Product(name, productTable.getProductPriceByName(name), totalQuantity, null);
+            return new Product(name, productTable.getProductPriceByName(name), totalQuantity, "null");
         }
 
         return new Product(name, productTable.getProductPriceByName(name), totalQuantity,
-                productTable.getPromotionByName(name).getName());
+                productTable.getPromotionByProductName(name, time).getName());
     }
 }
