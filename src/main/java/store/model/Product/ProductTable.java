@@ -15,7 +15,7 @@ public class ProductTable {
         this.table = table;
     }
 
-    public void validateRequests(List<PurchaseRequest> purchaseRequests) {
+    public void checkRequestValidity(List<PurchaseRequest> purchaseRequests) {
         for (PurchaseRequest purchaseRequest : purchaseRequests) {
             if (!hasSuchProduct(purchaseRequest.getProductName())
                     || !hasEnoughQuantity(purchaseRequest.getProductName(), purchaseRequest.getQuantity())) {
