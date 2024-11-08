@@ -57,7 +57,7 @@ public class Product {
         return promotion;
     }
 
-    public boolean hasPromotion() { // TODO. 중복되는 메소드?
+    public boolean hasPromotion() {
         if (promotion == null) {
             return false;
         }
