@@ -31,6 +31,9 @@ public class OutputView {
     }
 
     private static void printPromotionTransaction(Receipt receipt) {
+        if (receipt.getPromotionTransactions().stream().filter(t -> t != null).count() == 0) {
+            return;
+        }
         System.out.println("=============증	정==============="); // TODO. DIVIDER_PROMOTION_HEADER;
         System.out.println(
                 receipt.getPromotionTransactions()
