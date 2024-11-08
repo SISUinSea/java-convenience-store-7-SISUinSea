@@ -1,18 +1,16 @@
 package store.view;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
+import static store.utils.Parser.validateRequestsSyntax;
+
+import java.util.function.Supplier;
 
 public class InputView {
-    public static String askPurchaseRequest() {
-        while (true) {
-            try {
-                System.out.println("구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])");
-                // TODO. 예외 처리
-                return readLine();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    public static String askPurchaseRequests() {
+        System.out.println("구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])");
+        String purchaseRequestsLine = readLine();
+        validateRequestsSyntax(purchaseRequestsLine);
+        return purchaseRequestsLine;
     }
 
     public static String askAddFreePromotionProducts(String productName, Integer quantity) {
@@ -57,5 +55,15 @@ public class InputView {
     public static String askToContinuePurchase() {
         System.out.println("감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)");
         return readLine();
+    }
+
+    public static Object askUntilGetValidAnswer(Supplier supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

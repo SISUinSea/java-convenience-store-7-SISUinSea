@@ -27,7 +27,6 @@ import static store.model.Discount.DiscountFactory.createMembershipDiscount;
 import static store.utils.Parser.removeHeader;
 import static store.view.OutputView.printProductTable;
 import static store.view.OutputView.printReceipt;
-import static store.view.InputView.askPurchaseRequest;
 import static store.view.InputView.askAddFreePromotionProducts;
 import static store.view.InputView.askApplyMembershipDiscount;
 import static store.view.InputView.askRemoveNoPromotionProducts;
@@ -42,7 +41,7 @@ public class MainController {
     public static void purchaseUntilGetStopCommand(ProductTable productTable) {
         while (true) {
             printProductTable(productTable);
-            PurchaseRequests purchaseRequests = askUntilGetValidRequests(productTable);
+            PurchaseRequests purchaseRequests = getPurchaseRequests(productTable);
             TransactionTable transactionTable = processRequests(productTable, purchaseRequests, now());
             Discount membershipDiscount = suggestMembershipDiscount();
             Receipt receipt = new Receipt(transactionTable, membershipDiscount);
@@ -53,10 +52,9 @@ public class MainController {
         }
     }
 
-    public static PurchaseRequests askUntilGetValidRequests(ProductTable productTable) {
-        String purchaseLine = askPurchaseRequest();
-        PurchaseRequests purchaseRequests = createPurchaseRequests(purchaseLine);
-        productTable.validateRequests(purchaseRequests.getRequests());
+    public static PurchaseRequests getPurchaseRequests(ProductTable productTable) {
+        PurchaseRequests purchaseRequests = createPurchaseRequests();
+        productTable.checkRequestValidity(purchaseRequests.getRequests());
         return purchaseRequests;
     }
 
