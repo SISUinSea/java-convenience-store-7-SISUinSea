@@ -22,7 +22,7 @@ public class Parser {
 
     public static String validateRequestsSyntax(String requestsLine) {
         if (requestsLine.contains("--") || requestsLine.contains(",,")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
         }
         Arrays.stream(requestsLine.split(",", -1)).forEach(Parser::validateSingleRequestSyntax);
         return requestsLine;
@@ -30,22 +30,22 @@ public class Parser {
 
     private static void validateSingleRequestSyntax(String requestLine) {
         if (requestLine == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
         }
         if (!requestLine.startsWith("[") || !requestLine.endsWith("]")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
         }
         if (!requestLine.contains("-")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
         }
         requestLine = removeSquareBrakets(requestLine);
         String[] splittedRequestLine = requestLine.split("-", -1);
         if (splittedRequestLine.length != 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
         }
         for (String string : splittedRequestLine) {
             if (string.length() == 0 || string == null) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.ILLEGAL_REQUEST_SYNTAX.getDescription());
             }
         }
     }

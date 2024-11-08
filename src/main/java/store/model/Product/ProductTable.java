@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import store.model.Promotion.Promotion;
 import store.model.PurchaseRequest.PurchaseRequest;
 import store.model.Transaction.Transaction;
+import store.utils.ErrorMessage;
 
 public class ProductTable {
     List<Product> table;
@@ -17,9 +18,11 @@ public class ProductTable {
 
     public void checkRequestValidity(List<PurchaseRequest> purchaseRequests) {
         for (PurchaseRequest purchaseRequest : purchaseRequests) {
-            if (!hasSuchProduct(purchaseRequest.getProductName())
-                    || !hasEnoughQuantity(purchaseRequest.getProductName(), purchaseRequest.getQuantity())) {
-                throw new IllegalArgumentException();
+            if(!hasSuchProduct(purchaseRequest.getProductName())) {
+                throw new IllegalArgumentException(ErrorMessage.PRODUCT_NOT_EXIST.getDescription());
+            }
+            if (!hasEnoughQuantity(purchaseRequest.getProductName(), purchaseRequest.getQuantity())) {
+                throw new IllegalArgumentException(ErrorMessage.QUANTITY_NOT_ENOUGH.getDescription());
             }
         }
     }
