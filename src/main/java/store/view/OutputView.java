@@ -19,17 +19,32 @@ public class OutputView {
     }
 
     public static void printReceipt(Receipt receipt) {
+        printTotalTransactions(receipt);
+        printPromotionTransaction(receipt);
+        printCostsStatistic(receipt);
+    }
+
+    private static void printTotalTransactions(Receipt receipt) {
         System.out.println("==============W 편의점================"); // TODO. DIVIDER_RECEIPT_HEADER
         System.out.println("상품명" + "\t\t" + "수량" + "\t" + "금액");
         System.out.println(receipt.getTotalTransactions().stream().collect(Collectors.joining("\n")));
+    }
+
+    private static void printPromotionTransaction(Receipt receipt) {
         System.out.println("=============증	정==============="); // TODO. DIVIDER_PROMOTION_HEADER;
-        System.out.println(receipt.getPromotionTransactions().stream().collect(Collectors.joining("\n")));
+        System.out.println(
+                receipt.getPromotionTransactions()
+                        .stream()
+                        .filter(t -> t != null)
+                        .collect(Collectors.joining("\n")));
+    }
+
+    private static void printCostsStatistic(Receipt receipt) {
         System.out.println("===================================="); // TODO. DIVIDER_DEFAULT_LINE
         System.out.println("총구매액" + "\t\t" + receipt.getTotalQuantity() + "\t" + receipt.getCostInformation().get(0));
         System.out.println("행사할인" + "\t\t" + "\t" + receipt.getCostInformation().get(1));
         System.out.println("멤버십할인" + "\t\t" + "\t" + receipt.getCostInformation().get(2));
         System.out.println("내실돈" + "\t\t" + "\t" + receipt.getCostInformation().get(3));
-
     }
 }
 /*
