@@ -9,8 +9,8 @@ import java.util.List;
 public class ProductFactory {
     public static ProductTable createProductTable(List<String> productTableData) {
         List<Product> table = productTableData.stream().map(ProductFactory::createSingleProduct).toList();
-        List<Product> filledTable = fillGeneralProductIfAbsent(table);
-        return new ProductTable(filledTable);
+        // List<Product> filledTable = fillGeneralProductIfAbsent(table);
+        return new ProductTable(table);
     }
 
     private static Product createSingleProduct(String productData) {
