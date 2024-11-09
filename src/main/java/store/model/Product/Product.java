@@ -7,10 +7,10 @@ import java.text.NumberFormat;
 import store.model.Promotion.Promotion;
 
 public class Product {
-    private final String name;
-    private final Integer price;
-    private Integer quantity;
-    private Promotion promotion;
+    final String name;
+    final Integer price;
+    Integer quantity;
+    Promotion promotion;
 
     public Product(final String name, final Integer price, final Integer quantity, final String promotion) {
         this.name = name;

@@ -9,6 +9,6 @@ public class TransactionFactory {
         if (promotionQuantity > quantity) {
             quantity = promotionQuantity;
         }
-        return new Transaction(new Product(name, price, quantity, promotion), promotionQuantity);
+        return new Transaction(name, price, quantity, promotionQuantity, promotion);
     }
 }

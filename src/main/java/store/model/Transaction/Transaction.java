@@ -3,50 +3,44 @@ package store.model.Transaction;
 import java.text.NumberFormat;
 
 import store.model.Product.Product;
+import store.model.Promotion.Promotion;
 
-public class Transaction {
-    private final Product product;
+public class Transaction extends Product {
     private final Integer promotionQuantity;
 
-    public Transaction(final Product product, final Integer promotionQuantity) {
-        this.product = product;
+    public Transaction(final String name, final Integer price, final Integer quantity, final Integer promotionQuantity,
+            final Promotion promotion) {
+        super(name, price, quantity, promotion);
         this.promotionQuantity = promotionQuantity;
-    }
 
-    public String getName() {
-        return product.getName();
     }
 
     public Integer getTotalCost() {
-        return product.getPrice() * product.getQuantity();
-    }
-
-    public Integer getQuantity() {
-        return product.getQuantity();
+        return getPrice() * getQuantity();
     }
 
     public Integer getPromotionDiscountCost() {
-        if (!product.hasPromotion()) {
+        if (!hasPromotion()) {
             return 0;
         }
-        return product.getPromotion().getFreeQuantity(promotionQuantity) * product.getPrice();
+        return getPromotion().getFreeQuantity(promotionQuantity) * getPrice();
     }
 
     @Override
     public String toString() {
-        return product.getName() + "\t\t" + product.getQuantity() + "\t" + formattedTotalPrice();
+        return getName() + "\t\t" + getQuantity() + "\t" + formattedTotalPrice();
     }
 
     public String promotionToString() {
-        if (!product.hasPromotion() || product.getQuantity() == 0) {
+        if (!hasPromotion() || getQuantity() == 0) {
             return null;
         }
-        Integer get = product.getPromotion().getGet();
-        Integer bundle = product.getPromotion().getBundle();
-        return product.getName() + "\t\t" + (promotionQuantity / bundle) * get; // TODO. refactor
+        Integer get = getPromotion().getGet();
+        Integer bundle = getPromotion().getBundle();
+        return getName() + "\t\t" + (promotionQuantity / bundle) * get; // TODO. refactor
     }
 
     public String formattedTotalPrice() {
-        return NumberFormat.getInstance().format(product.getPrice() * product.getQuantity());
+        return NumberFormat.getInstance().format(getPrice() * getQuantity());
     }
 }
