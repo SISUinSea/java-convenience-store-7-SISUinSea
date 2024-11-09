@@ -1,16 +1,34 @@
 package store.model.Product;
 
 import static store.utils.Parser.parsePromotionName;
+import static store.utils.Parser.removeHeader;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static store.model.Product.ProductTable.getProductPriceByName;
+import static store.model.Product.ProductTable.getPromotionByProductName;
+
 public class ProductFactory {
-    public static ProductTable createProductTable(List<String> productTableData) {
+    public static List<Product> bootProductTable() {
+        try {
+            List<String> productLines = Files.readAllLines(Paths.get("./src/main/resources/products.md"));
+            List<String> trimmedProductLines = removeHeader(productLines);
+
+            return createProductTable(trimmedProductLines);
+        } catch (IOException e) {
+            throw new IllegalStateException();
+        }
+    }
+
+    private static List<Product> createProductTable(List<String> productTableData) {
         List<Product> table = productTableData.stream().map(ProductFactory::createSingleProduct).toList();
         // List<Product> filledTable = fillGeneralProductIfAbsent(table);
-        return new ProductTable(table);
+        return table;
     }
 
     private static Product createSingleProduct(String productData) {
@@ -45,13 +63,12 @@ public class ProductFactory {
     }
 
     public static Product createSingleTransactionProduct(String name, Integer totalQuantity,
-            Integer promotionQuantity,
-            ProductTable productTable, LocalDateTime time) {
+            Integer promotionQuantity, LocalDateTime time) {
         if (promotionQuantity == 0 || promotionQuantity == null) {
-            return new Product(name, productTable.getProductPriceByName(name), totalQuantity, "null");
+            return new Product(name, getProductPriceByName(name), totalQuantity, "null");
         }
 
-        return new Product(name, productTable.getProductPriceByName(name), totalQuantity,
-                productTable.getPromotionByProductName(name, time).getName());
+        return new Product(name, getProductPriceByName(name), totalQuantity,
+                getPromotionByProductName(name, time).getName());
     }
 }

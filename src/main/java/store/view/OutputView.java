@@ -2,13 +2,14 @@ package store.view;
 
 import java.util.stream.Collectors;
 
-import store.model.Product.ProductTable;
 import store.model.Receipt.Receipt;
 
+import static store.model.Product.ProductTable.productTableToString;
+
 public class OutputView {
-    public static void printProductTable(ProductTable productTable) {
+    public static void printProductTable() {
         printProductTableHeader();
-        System.out.println(productTable.toString());
+        System.out.println(productTableToString());
         System.out.println("\n");
     }
 

@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import store.model.Product.ProductTable;
+import static store.model.Product.ProductTable.checkRequestValidity;
 import store.utils.Parser;
 
 public class PurchaseRequestFactory {
-    public static PurchaseRequests createPurchaseRequests(ProductTable productTable) {
+    public static PurchaseRequests createPurchaseRequests() {
         return (PurchaseRequests) askUntilGetValidAnswer(() -> {
             String purchaseRequestsLine = askPurchaseRequests();
             List<String> requests = Arrays.stream(purchaseRequestsLine.split(","))
@@ -20,7 +20,7 @@ public class PurchaseRequestFactory {
             List<PurchaseRequest> purchaseRequests = requests.stream()
                     .map(PurchaseRequestFactory::createSinglePurchaseRequest)
                     .toList();
-            productTable.checkRequestValidity(purchaseRequests);
+            checkRequestValidity(purchaseRequests);
             return new PurchaseRequests(new LinkedList<PurchaseRequest>(purchaseRequests));
         });
     }

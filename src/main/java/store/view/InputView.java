@@ -2,6 +2,7 @@ package store.view;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 import static store.utils.Parser.validateRequestsSyntax;
+import static store.utils.Parser.validateYNAnswer;
 
 import java.util.function.Supplier;
 
@@ -20,9 +21,7 @@ public class InputView {
                         productName,
                         quantity);
                 String answer = readLine();
-                if (!answer.equals("Y") && !answer.equals("N")) {
-                    throw new IllegalArgumentException("[ERROR] 잘못된 입력입니다. 다시 입력해 주세요.");
-                }
+                validateYNAnswer(answer);
                 return answer;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -37,9 +36,7 @@ public class InputView {
                         productName,
                         removeQuantity);
                 String answer = readLine();
-                if (!answer.equals("Y") && !answer.equals("N")) {
-                    throw new IllegalArgumentException("[ERROR] 잘못된 입력입니다. 다시 입력해 주세요.");
-                }
+                validateYNAnswer(answer);
                 return answer;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -49,12 +46,16 @@ public class InputView {
 
     public static String askApplyMembershipDiscount() {
         System.out.println("멤버십 할인을 받으시겠습니까? (Y/N)");
-        return readLine();
+        String answer = readLine();
+        validateYNAnswer(answer);
+        return answer;
     }
 
     public static String askToContinuePurchase() {
         System.out.println("감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)");
-        return readLine();
+        String answer = readLine();
+        validateYNAnswer(answer);
+        return answer;
     }
 
     public static Object askUntilGetValidAnswer(Supplier supplier) {
@@ -66,4 +67,5 @@ public class InputView {
             }
         }
     }
+
 }
