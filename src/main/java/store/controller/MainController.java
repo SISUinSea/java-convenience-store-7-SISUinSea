@@ -10,9 +10,9 @@ import store.model.PurchaseRequest.PurchaseRequests;
 import store.model.Receipt.Receipt;
 
 import static camp.nextstep.edu.missionutils.DateTimes.now;
-import static store.controller.SystemBootloader.bootProductTable;
-import static store.controller.RequestProcessor.processRequests;
 import static store.model.PurchaseRequest.PurchaseRequestFactory.createPurchaseRequests;
+import static store.service.RequestProcessor.processRequests;
+import static store.service.SystemBootloader.bootProductTable;
 import static store.model.Discount.DiscountFactory.createMembershipDiscount;
 import static store.view.OutputView.printProductTable;
 import static store.view.OutputView.printReceipt;

@@ -1,4 +1,4 @@
-package store.controller;
+package store.service;
 
 import static store.model.Product.ProductFactory.createProductTable;
 import static store.utils.Parser.removeHeader;

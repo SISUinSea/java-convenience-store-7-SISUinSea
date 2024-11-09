@@ -1,4 +1,4 @@
-package store.controller;
+package store.service;
 
 import static store.model.Transaction.TransactionFactory.createTransaction;
 import static store.view.InputView.askAddFreePromotionProducts;
