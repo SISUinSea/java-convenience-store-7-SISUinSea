@@ -26,18 +26,17 @@ public class MainController {
         purchaseUntilGetStopCommand(productTable);
     }
 
-    public static void purchaseUntilGetStopCommand(ProductTable productTable) {
-        while (true) {
+    public static void purchaseUntilGetStopCommand(ProductTable productTable) { // TODO. 10줄 이상
+        String answer;
+        do {
             printProductTable(productTable);
             PurchaseRequests purchaseRequests = getPurchaseRequests(productTable);
             TransactionTable transactionTable = processRequests(productTable, purchaseRequests, now());
             Discount membershipDiscount = suggestMembershipDiscount();
             Receipt receipt = new Receipt(transactionTable, membershipDiscount);
             printReceipt(receipt);
-            if (askToContinuePurchase().equals("N")) {
-                break;
-            }
-        }
+            answer = (String) askUntilGetValidAnswer(() -> askToContinuePurchase());
+        } while ((answer).equals("Y"));
     }
 
     public static PurchaseRequests getPurchaseRequests(ProductTable productTable) {

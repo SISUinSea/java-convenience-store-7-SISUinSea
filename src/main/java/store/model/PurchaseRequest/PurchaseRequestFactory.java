@@ -23,7 +23,6 @@ public class PurchaseRequestFactory {
             productTable.checkRequestValidity(purchaseRequests);
             return new PurchaseRequests(new LinkedList<PurchaseRequest>(purchaseRequests));
         });
-
     }
 
     public static PurchaseRequest createSinglePurchaseRequest(String request) {
