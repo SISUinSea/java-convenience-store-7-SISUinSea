@@ -2,11 +2,12 @@ package store.model.Promotion;
 
 import java.util.List;
 
-public class PromotionTable {
-    private static List<Promotion> promotions;
+import static store.model.Promotion.PromotionFactory.bootPromotionTable;
 
-    public PromotionTable(List<Promotion> promotions) {
-        this.promotions = promotions;
+public class PromotionTable {
+    private static List<Promotion> promotions = bootPromotionTable();
+
+    private PromotionTable() {
     }
 
     public static Promotion getPromotionByName(String promotionName) {
