@@ -12,7 +12,6 @@ import store.model.Receipt.Receipt;
 import static camp.nextstep.edu.missionutils.DateTimes.now;
 import static store.model.PurchaseRequest.PurchaseRequestFactory.createPurchaseRequests;
 import static store.service.RequestProcessor.processRequests;
-import static store.model.Product.ProductFactory.bootProductTable;
 import static store.model.Discount.DiscountFactory.createMembershipDiscount;
 import static store.view.OutputView.printProductTable;
 import static store.view.OutputView.printReceipt;
@@ -22,6 +21,7 @@ import static store.view.InputView.askUntilGetValidAnswer;
 
 public class MainController {
     public static void run() throws IOException {
+        new ProductTable();
         purchaseUntilGetStopCommand();
     }
 

@@ -14,7 +14,8 @@ import static store.model.Product.ProductFactory.bootProductTable;
 public class ProductTable {
     private static List<Product> table = bootProductTable();
 
-    private ProductTable() {
+    public ProductTable() {
+        this.table = bootProductTable();
     }
 
     public static void checkRequestValidity(List<PurchaseRequest> purchaseRequests) {
