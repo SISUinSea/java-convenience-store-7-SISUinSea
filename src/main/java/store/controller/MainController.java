@@ -20,12 +20,12 @@ import static store.view.InputView.askToContinuePurchase;
 import static store.view.InputView.askUntilGetValidAnswer;
 
 public class MainController {
-    public static void run() throws IOException {
+    public static void run() {
         new ProductTable();
         purchaseUntilGetStopCommand();
     }
 
-    public static void purchaseUntilGetStopCommand() { // TODO. 10줄 이상
+    public static void purchaseUntilGetStopCommand() {
         String answer;
         do {
             printProductTable();
