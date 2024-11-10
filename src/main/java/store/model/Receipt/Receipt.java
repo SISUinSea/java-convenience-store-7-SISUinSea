@@ -17,15 +17,16 @@ public class Receipt {
     private Integer discountCost = 0;
     private Integer finalPayCost;
 
-    public Receipt(TransactionTable transactionTable, Discount discount) {
-        transactionTable.getTransactions().stream().forEach(transaction -> recordTransaction(transaction));
+    public Receipt(final TransactionTable transactionTable, final Discount discount) {
+        transactionTable.getTransactions().stream()
+                .forEach(transaction -> recordTransaction(transaction));
         if (discount != null) {
             discountCost = discount.applyDiscount(totalPurchaseCost - promotionCost);
         }
         finalPayCost = totalPurchaseCost - promotionCost - discountCost;
     }
 
-    private void recordTransaction(Transaction transaction) {
+    private void recordTransaction(final Transaction transaction) {
         totalTransactions.add(transaction.toString());
         totalQuantity += transaction.getQuantity();
         promotionTransactions.add(transaction.promotionToString());

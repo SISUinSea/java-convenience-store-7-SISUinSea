@@ -21,8 +21,9 @@ import static store.model.Product.ProductTable.hasEnoughPromotionQuantity;
 import static store.model.Product.ProductTable.getPromotionBundleCount;
 
 public class RequestProcessor {
-    public static TransactionTable processRequests(PurchaseRequests purchaseRequests,
-            LocalDateTime time) {
+    public static TransactionTable processRequests(
+            final PurchaseRequests purchaseRequests,
+            final LocalDateTime time) {
         List<Transaction> transactions = new ArrayList<>();
         for (PurchaseRequest request : purchaseRequests.getRequests()) {
             Transaction transaction = processRequest(request, time);
@@ -32,7 +33,9 @@ public class RequestProcessor {
         return new TransactionTable(transactions);
     }
 
-    private static Transaction processRequest(PurchaseRequest request, LocalDateTime time) {
+    private static Transaction processRequest(
+            final PurchaseRequest request,
+            final LocalDateTime time) {
         String name = request.getProductName();
         Integer price = getProductPriceByName(request.getProductName());
         Promotion promotion = getPromotionByProductName(name, time);
@@ -41,7 +44,9 @@ public class RequestProcessor {
         return createTransaction(name, price, quantity, promotionQuantity, promotion);
     }
 
-    private static Integer adjustQuantity(PurchaseRequest request, Promotion promotion) {
+    private static Integer adjustQuantity(
+            final PurchaseRequest request,
+            final Promotion promotion) {
         if (promotion == null) {
             return request.getQuantity();
         }
@@ -51,7 +56,10 @@ public class RequestProcessor {
         return suggestDecreaseQuantity(request.getProductName(), request.getQuantity(), promotion);
     }
 
-    private static Integer calculateAdditionalOptimalValue(String name, Integer quantity, Promotion promotion) {
+    private static Integer calculateAdditionalOptimalValue(
+            final String name,
+            final Integer quantity,
+            final Promotion promotion) {
         Integer bundle = promotion.getBundle();
         Integer buy = promotion.getBuy();
         Integer get = promotion.getGet();
@@ -64,7 +72,10 @@ public class RequestProcessor {
         return quantity;
     }
 
-    private static Integer suggestDecreaseQuantity(String name, Integer quantity, Promotion promotion) {
+    private static Integer suggestDecreaseQuantity(
+            final String name,
+            final Integer quantity,
+            final Promotion promotion) {
         Integer surpulsQuantity = quantity - getPromotionBundleCount(name);
         String answer = askRemoveNoPromotionProducts(name, surpulsQuantity);
         if (answer.equals("Y")) {
@@ -73,7 +84,10 @@ public class RequestProcessor {
         return quantity - surpulsQuantity;
     }
 
-    private static Integer getPromotionQuantity(String name, Integer quantity, Promotion promotion) {
+    private static Integer getPromotionQuantity(
+            final String name,
+            final Integer quantity,
+            final Promotion promotion) {
         if (promotion == null) {
             return 0;
         }

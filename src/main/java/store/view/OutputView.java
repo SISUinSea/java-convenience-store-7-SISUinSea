@@ -9,7 +9,7 @@ import static store.model.Product.ProductTable.productTableToString;
 public class OutputView {
     private static final String HELLO = "안녕하세요. W편의점입니다.";
     private static final String CURRENT_STOCK_HEADER = "현재 보유하고 있는 상품입니다.";
-    private static final String DIVIDER_RECEIPT_HEADER = "==============W 편의점================";
+    private static final String DIVIDER_RECEIPT_HEADER = "\n==============W 편의점================";
     private static final String RECEIPT_3_ELEMENTS_COLUMN_FORMAT = "%-10s%-10s%s";
     private static final String RECEIPT_2_ELEMENTS_COLUMN_FORMAT = "%-20s%s";
     private static final String PRODUCT_NAME = "상품명";
@@ -24,14 +24,13 @@ public class OutputView {
 
     public static void printProductTable() {
         printProductTableHeader();
-        System.out.println(productTableToString());
         System.out.println();
+        System.out.println(productTableToString());
     }
 
     private static void printProductTableHeader() {
         System.out.println(HELLO);
         System.out.println(CURRENT_STOCK_HEADER);
-        System.out.println();
     }
 
     public static void printReceipt(Receipt receipt) {
@@ -40,13 +39,13 @@ public class OutputView {
         printCostsStatistic(receipt);
     }
 
-    private static void printTotalTransactions(Receipt receipt) {
+    private static void printTotalTransactions(final Receipt receipt) {
         System.out.println(DIVIDER_RECEIPT_HEADER);
         System.out.println(String.format(RECEIPT_3_ELEMENTS_COLUMN_FORMAT, PRODUCT_NAME, PRICE, QUANTITY));
         System.out.println(receipt.getTotalTransactions().stream().collect(Collectors.joining("\n")));
     }
 
-    private static void printPromotionTransaction(Receipt receipt) {
+    private static void printPromotionTransaction(final Receipt receipt) {
         if (receipt.getPromotionTransactions().stream().filter(t -> t != null).count() == 0) {
             return;
         }
@@ -58,7 +57,7 @@ public class OutputView {
                         .collect(Collectors.joining("\n")));
     }
 
-    private static void printCostsStatistic(Receipt receipt) {
+    private static void printCostsStatistic(final Receipt receipt) {
         System.out.println(DIVIDER_DEFAULT_LINE);
         System.out.println(String.format(RECEIPT_3_ELEMENTS_COLUMN_FORMAT,
                 TOTAL_PURCHASE_PAYMENT,

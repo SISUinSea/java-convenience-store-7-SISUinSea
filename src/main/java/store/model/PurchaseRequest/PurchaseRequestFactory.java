@@ -25,7 +25,7 @@ public class PurchaseRequestFactory {
         });
     }
 
-    public static PurchaseRequest createSinglePurchaseRequest(String request) {
+    public static PurchaseRequest createSinglePurchaseRequest(final String request) {
         String[] parsedRequest = request.split("-");
         String productName = parsedRequest[0];
         Integer quantity = Integer.parseInt(parsedRequest[1]);

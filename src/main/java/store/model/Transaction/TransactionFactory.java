@@ -1,10 +1,13 @@
 package store.model.Transaction;
 
-import store.model.Product.Product;
 import store.model.Promotion.Promotion;
 
 public class TransactionFactory {
-    public static Transaction createTransaction(String name, Integer price, Integer quantity, Integer promotionQuantity,
+    public static Transaction createTransaction(
+            final String name,
+            final Integer price,
+            Integer quantity,
+            final Integer promotionQuantity,
             Promotion promotion) {
         if (promotionQuantity > quantity) {
             quantity = promotionQuantity;

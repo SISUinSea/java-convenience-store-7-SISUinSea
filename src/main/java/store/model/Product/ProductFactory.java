@@ -25,13 +25,13 @@ public class ProductFactory {
         }
     }
 
-    private static List<Product> createProductTable(List<String> productTableData) {
+    private static List<Product> createProductTable(final List<String> productTableData) {
         List<Product> table = productTableData.stream().map(ProductFactory::createSingleProduct).toList();
         List<Product> filledTable = fillGeneralProductIfAbsent(table);
         return filledTable;
     }
 
-    private static Product createSingleProduct(String productData) {
+    private static Product createSingleProduct(final String productData) {
         String[] parsedProductData = productData.split(",");
         String name = parsedProductData[0];
         Integer price = Integer.parseInt(parsedProductData[1]);
@@ -40,7 +40,7 @@ public class ProductFactory {
         return new Product(name, price, quantity, promotion);
     }
 
-    private static List<Product> fillGeneralProductIfAbsent(List<Product> table) {
+    private static List<Product> fillGeneralProductIfAbsent(final List<Product> table) {
         List<Product> filledTable = new ArrayList<>();
         for (Product product : table) {
             filledTable.add(product);
@@ -51,18 +51,18 @@ public class ProductFactory {
         return filledTable;
     }
 
-    private static Product createEmptyProduct(String name, Integer price) {
+    private static Product createEmptyProduct(final String name, final Integer price) {
         return new Product(name, price, 0, "null");
     }
 
-    private static boolean hasDoubleProducts(String productName, List<Product> table) {
+    private static boolean hasDoubleProducts(final String productName, final List<Product> table) {
         if (table.stream().filter(product -> product.getName().equals(productName)).count() == 2) {
             return true;
         }
         return false;
     }
 
-    public static Product createSingleTransactionProduct(String name, Integer totalQuantity,
+    public static Product createSingleTransactionProduct(final String name, final Integer totalQuantity,
             Integer promotionQuantity, LocalDateTime time) {
         if (promotionQuantity == 0 || promotionQuantity == null) {
             return new Product(name, getProductPriceByName(name), totalQuantity, "null");

@@ -11,7 +11,12 @@ public class Promotion {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    public Promotion(String name, Integer buy, Integer get, LocalDate startDate, LocalDate endDate) {
+    public Promotion(
+            final String name,
+            final Integer buy,
+            final Integer get,
+            final LocalDate startDate,
+            final LocalDate endDate) {
         this.name = name;
         this.buy = buy;
         this.get = get;
@@ -19,14 +24,15 @@ public class Promotion {
         this.endDate = endDate;
     }
 
-    public boolean isPromotioning(LocalDateTime currentTime) {
-        if (startDate.atStartOfDay().isBefore(currentTime) && endDate.atTime(LocalTime.MAX).isAfter(currentTime)) {
+    public boolean isPromotioning(final LocalDateTime currentTime) {
+        if (startDate.atStartOfDay().isBefore(currentTime)
+                && endDate.atTime(LocalTime.MAX).isAfter(currentTime)) {
             return true;
         }
         return false;
     }
 
-    public Integer getFreeQuantity(Integer promotionQuantity) {
+    public Integer getFreeQuantity(final Integer promotionQuantity) {
         return promotionQuantity / getBundle() * get;
     }
 

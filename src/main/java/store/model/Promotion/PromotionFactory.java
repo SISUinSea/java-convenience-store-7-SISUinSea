@@ -17,18 +17,17 @@ public class PromotionFactory {
             List<String> trimmedPromotionLines = removeHeader(promotionLines);
             return createPromotionTable(trimmedPromotionLines);
         } catch (IOException e) {
-            throw new IllegalStateException(ErrorMessage.ILLEGAL_BOOT_SYSTEM.getDescription()); // TODO. 이게 맞을까? + 새로운
-                                                                                                // 에러 메시지 만들어도 괜찮나?
+            throw new IllegalStateException(ErrorMessage.ILLEGAL_BOOT_SYSTEM.getDescription());
         }
     }
 
-    private static List<Promotion> createPromotionTable(List<String> promotionTableData) {
+    private static List<Promotion> createPromotionTable(final List<String> promotionTableData) {
         List<Promotion> promotions = promotionTableData.stream()
                 .map(PromotionFactory::createSinglePromotion).toList();
         return promotions;
     }
 
-    private static Promotion createSinglePromotion(String promotionData) {
+    private static Promotion createSinglePromotion(final String promotionData) {
         String[] parsedPromotionData = promotionData.split(",");
         String name = parsedPromotionData[0];
         Integer buy = Integer.parseInt(parsedPromotionData[1]);

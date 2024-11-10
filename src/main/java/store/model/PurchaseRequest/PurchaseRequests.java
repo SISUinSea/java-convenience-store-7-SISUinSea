@@ -5,7 +5,7 @@ import java.util.List;
 public class PurchaseRequests {
     List<PurchaseRequest> requests;
 
-    public PurchaseRequests(List<PurchaseRequest> queue) {
+    public PurchaseRequests(final List<PurchaseRequest> queue) {
         this.requests = queue;
     }
 

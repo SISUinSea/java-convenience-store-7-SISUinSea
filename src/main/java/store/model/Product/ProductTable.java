@@ -18,7 +18,7 @@ public class ProductTable {
         this.table = bootProductTable();
     }
 
-    public static void checkRequestValidity(List<PurchaseRequest> purchaseRequests) {
+    public static void checkRequestValidity(final List<PurchaseRequest> purchaseRequests) {
         for (PurchaseRequest purchaseRequest : purchaseRequests) {
             if (!hasSuchProduct(purchaseRequest.getProductName())) {
                 throw new IllegalArgumentException(ErrorMessage.PRODUCT_NOT_EXIST.getDescription());
@@ -29,11 +29,11 @@ public class ProductTable {
         }
     }
 
-    public static boolean hasSuchProduct(String productName) {
+    public static boolean hasSuchProduct(final String productName) {
         return table.stream().map(Product::getName).anyMatch(name -> name.equals(productName));
     }
 
-    public static boolean hasEnoughQuantity(String productName, Integer requestQuantity) {
+    public static boolean hasEnoughQuantity(final String productName, final Integer requestQuantity) {
         Integer totalQuantity = table.stream().filter(product -> product.getName().equals(productName))
                 .mapToInt(Product::getQuantity).sum();
         if (totalQuantity >= requestQuantity) {
@@ -42,7 +42,7 @@ public class ProductTable {
         return false;
     }
 
-    public static Integer getAdditionalQuantityToOptimize(String productName, Integer requestQuantity) {
+    public static Integer getAdditionalQuantityToOptimize(final String productName, final Integer requestQuantity) {
         List<Product> targetProduct = getPromotionProducts(productName);
         Promotion targetPromotion = targetProduct.get(0).getPromotion();
         Integer buy = targetPromotion.getBuy();
@@ -53,7 +53,7 @@ public class ProductTable {
         return 0;
     }
 
-    public static void update(Transaction transaction) {
+    public static void update(final Transaction transaction) {
         List<Product> targetProducts = table.stream()
                 .filter(p -> p.getName().equals(transaction.getName())).toList();
         Integer totalPurchaseQuantity = 0;
@@ -65,7 +65,7 @@ public class ProductTable {
         }
     }
 
-    public static boolean hasPromotion(String productName, LocalDateTime time) {
+    public static boolean hasPromotion(final String productName, final LocalDateTime time) {
         List<Product> products = table.stream()
                 .filter(product -> product.getName().equals(productName) && product.getPromotion() != null).toList();
         List<Product> currentPromotionProduct = products.stream()
@@ -73,36 +73,36 @@ public class ProductTable {
         return !currentPromotionProduct.isEmpty();
     }
 
-    public static List<Product> getPromotionProducts(String productName) {
+    public static List<Product> getPromotionProducts(final String productName) {
         List<Product> products = table.stream()
                 .filter(product -> product.getName().equals(productName) && product.getPromotion() != null).toList();
         return products;
     }
 
-    public static boolean hasEnoughPromotionQuantity(String productName, Integer requestQuantity) {
+    public static boolean hasEnoughPromotionQuantity(final String productName, final Integer requestQuantity) {
         if (requestQuantity > getPromotionBundleCount(productName)) {
             return false;
         }
         return true;
     }
 
-    public static Integer getPromotionBundleCount(String productName) {
+    public static Integer getPromotionBundleCount(final String productName) {
         Product targetProduct = getPromotionProducts(productName).get(0);
         Integer buy = targetProduct.getPromotion().getBuy();
         Integer get = targetProduct.getPromotion().getGet();
         return targetProduct.getQuantity() - (targetProduct.getQuantity() % (buy + get));
     }
 
-    public static List<Product> getProductsByProductName(String productName) {
+    public static List<Product> getProductsByProductName(final String productName) {
         return table.stream().filter(product -> product.getName().equals(productName)).toList();
     }
 
-    public static Integer getProductPriceByName(String productName) {
+    public static Integer getProductPriceByName(final String productName) {
         List<Product> products = table.stream().filter(product -> product.getName().equals(productName)).toList();
         return products.get(0).getPrice();
     }
 
-    public static Promotion getPromotionByProductName(String productName, LocalDateTime time) {
+    public static Promotion getPromotionByProductName(final String productName, final LocalDateTime time) {
         if (!hasPromotion(productName, time)) {
             return null;
         }

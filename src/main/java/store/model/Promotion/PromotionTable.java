@@ -10,7 +10,7 @@ public class PromotionTable {
     private PromotionTable() {
     }
 
-    public static Promotion getPromotionByName(String promotionName) {
+    public static Promotion getPromotionByName(final String promotionName) {
         List<Promotion> targetPromotion = promotions.stream()
                 .filter(promotion -> promotion.getName().equals(promotionName)).toList();
         if (targetPromotion.isEmpty()) {

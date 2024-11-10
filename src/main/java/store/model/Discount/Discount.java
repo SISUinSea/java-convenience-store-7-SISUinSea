@@ -16,7 +16,7 @@ public class Discount {
         this.totalDiscountAmount = 0;
     }
 
-    public Integer applyDiscount(Integer beforeDiscount) {
+    public Integer applyDiscount(final Integer beforeDiscount) {
         Integer discountAmount = (int) (beforeDiscount * rate);
         if (totalDiscountAmount + discountAmount < limit) {
             totalDiscountAmount += discountAmount;

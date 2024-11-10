@@ -5,6 +5,7 @@ import static store.model.Promotion.PromotionTable.getPromotionByName;
 import java.text.NumberFormat;
 
 import store.model.Promotion.Promotion;
+import store.utils.ErrorMessage;
 
 public class Product {
     final String name;
@@ -35,8 +36,7 @@ public class Product {
 
     public void decreaseQuantityByOne() {
         if (isEmpty()) {
-            // throw new IllegalStateException();
-            return;
+            throw new IllegalStateException(ErrorMessage.QUANTITY_NOT_ENOUGH.getDescription());
         }
         quantity--;
     }

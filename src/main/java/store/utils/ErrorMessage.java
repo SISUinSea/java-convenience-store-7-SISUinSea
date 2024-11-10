@@ -9,7 +9,7 @@ public enum ErrorMessage {
 
     private final String description;
 
-    private ErrorMessage(String description) {
+    private ErrorMessage(final String description) {
         this.description = description;
     }
 

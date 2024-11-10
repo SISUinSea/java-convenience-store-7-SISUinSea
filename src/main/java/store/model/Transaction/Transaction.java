@@ -8,7 +8,11 @@ import store.model.Promotion.Promotion;
 public class Transaction extends Product {
     private final Integer promotionQuantity;
 
-    public Transaction(final String name, final Integer price, final Integer quantity, final Integer promotionQuantity,
+    public Transaction(
+            final String name,
+            final Integer price,
+            final Integer quantity,
+            final Integer promotionQuantity,
             final Promotion promotion) {
         super(name, price, quantity, promotion);
         this.promotionQuantity = promotionQuantity;
