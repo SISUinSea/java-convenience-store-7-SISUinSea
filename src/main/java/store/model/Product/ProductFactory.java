@@ -27,8 +27,8 @@ public class ProductFactory {
 
     private static List<Product> createProductTable(List<String> productTableData) {
         List<Product> table = productTableData.stream().map(ProductFactory::createSingleProduct).toList();
-        // List<Product> filledTable = fillGeneralProductIfAbsent(table);
-        return table;
+        List<Product> filledTable = fillGeneralProductIfAbsent(table);
+        return filledTable;
     }
 
     private static Product createSingleProduct(String productData) {
@@ -44,7 +44,7 @@ public class ProductFactory {
         List<Product> filledTable = new ArrayList<>();
         for (Product product : table) {
             filledTable.add(product);
-            if (!hasDoubleProducts(product.getName(), table)) {
+            if (!hasDoubleProducts(product.getName(), table) && product.hasPromotion()) {
                 filledTable.add(createEmptyProduct(product.getName(), product.getPrice()));
             }
         }
