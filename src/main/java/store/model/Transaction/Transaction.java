@@ -28,7 +28,7 @@ public class Transaction extends Product {
 
     @Override
     public String toString() {
-        return getName() + "\t\t" + getQuantity() + "\t" + formattedTotalPrice();
+        return String.format("%-10s%-10d%s", getName(), getQuantity(), formattedTotalPrice());
     }
 
     public String promotionToString() {
@@ -37,7 +37,7 @@ public class Transaction extends Product {
         }
         Integer get = getPromotion().getGet();
         Integer bundle = getPromotion().getBundle();
-        return getName() + "\t\t" + (promotionQuantity / bundle) * get; // TODO. refactor
+        return String.format("%-10s%-10d", getName(), (promotionQuantity / bundle) * get); // TODO. refactor
     }
 
     public String formattedTotalPrice() {
