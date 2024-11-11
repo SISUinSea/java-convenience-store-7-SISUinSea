@@ -1,7 +1,5 @@
 package store.controller;
 
-import java.io.IOException;
-
 import store.model.Discount.Discount;
 import store.model.Product.ProductTable;
 import store.model.Transaction.TransactionTable;

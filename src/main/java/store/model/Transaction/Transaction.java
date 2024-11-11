@@ -41,7 +41,7 @@ public class Transaction extends Product {
         }
         Integer get = getPromotion().getGet();
         Integer bundle = getPromotion().getBundle();
-        return String.format("%-10s%-10d", getName(), (promotionQuantity / bundle) * get); // TODO. refactor
+        return String.format("%-10s%-10d", getName(), (promotionQuantity / bundle) * get);
     }
 
     public String formattedTotalPrice() {
