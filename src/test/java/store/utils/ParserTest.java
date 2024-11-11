@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ParserTest {
     @DisplayName("구매 요청 입력 예외 테스트")
     @ParameterizedTest
-    @ValueSource(strings = { "[-]", "[]", "[--]", "-[]", "][]", "[콜라-3],", ",[콜라-3]" })
+    @ValueSource(strings = { "[-]", "[]", "[--]", "-[]", "][]", "[콜라-3],", ",[콜라-3]", "[콜라-1],[콜라-2]" })
     void validateRequestsSyntaxTest(String requestsLine) {
         assertThatThrownBy(
                 () -> validateRequestsSyntax(requestsLine))
