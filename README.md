@@ -1,10 +1,24 @@
 # java-convenience-store-precourse
+우아한 테크 코스에서 진행하는 프리코스 4주차 과제입니다.
+구매자의 할인 혜택과 재고 상황을 고려하여 최종 결제 금액을 계산하고 안내하는 결제 시스템을 구현해보았습니다.
 
 # 전체 기능 플로우차트
 ![alt text](<편의점 전체.jpg>)
 
 # 프로모션 적용 기능 플로우차트
 ![alt text](프로모션.jpg)
+
+# 모델 설명
+해당 어플리케이션 구현에 사용한 모델은 다음과 같습니다.
+- Product: 상품 정보를 관리하는 객체입니다. 
+    - products.md 파일에서 읽어온 상품 정보를 저장하는데 사용됩니다. 읽어온 상품들은 ProductTable 객체에서 관리합니다.
+    - 거래 정보를 관리하는 객체 Transaction에게 Product를 상속합니다.
+- Promotion: 프로모션 정보를 관리하는 객체입니다. promotions.md 파일에서 읽어온 프로모션 정보를 저장합니다. 읽어온 프로모션 정보는 PromotionTable 객체에서 관리합니다.
+- PurchaseRequest: 사용자의 구매 요청을 관리하는 객체입니다.
+- Transaction: PurchaseRequest에 대응하는 객체입니다. 구매 요청(PurchaseRequest)을 처리(process)해서 반환된 객체입니다. Product를 상속합니다.
+- Discount: 할인을 정의하고 할인 정보를 저장하는 객체입니다.
+- Receipt: 거래 정보인 Transaction 객체들과 할인 정보인 Discount 객체를 통해 최종 결제를 관리하는 객체입니다.
+
 # 핵심 기능
 - [x] products.md, promotion.md에서 재고 정보 읽어 객체로 만들기
     - [x] products.md 파일을 읽기
